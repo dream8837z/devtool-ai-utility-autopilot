@@ -135,16 +135,20 @@ def render_page(
     <section class="card" style="margin-top:20px;border-color:rgba(96,165,250,0.45);background:linear-gradient(135deg,rgba(96,165,250,0.10),rgba(52,211,153,0.08))">
       <div class="grid-2">
         <div>
-          <span class="badge green">Pro Digital Download Vault</span>
-          <h3>ToolForge Pro — AI Prompt Engineering &amp; DevOps Cron/Regex Vault</h3>
-          <p class="muted" style="font-size:0.86rem">Download the complete offline CSV, Notion, and JSON bundle of 20 structured ChatGPT/Claude/Gemini prompts, 20 production Cron schedules, 20 Regex validation patterns, and 20 HTTP troubleshooting playbooks.</p>
-          <a class="btn green btn-sm" href="{html.escape(cfg.gumroad_vault_url or (prefix + 'tools/ai-prompt-optimizer.html'))}" rel="noopener">Get Complete AI &amp; DevOps Vault →</a>
+          <span class="badge green">Pro Digital Vault &amp; Chrome Extension</span>
+          <h3>ToolForge Pro — AI Prompt Vault &amp; Offline Chrome Extension</h3>
+          <p class="muted" style="font-size:0.86rem">Download the complete offline CSV, Notion, and JSON bundle of 80 prompts/cron/regex/HTTP guides plus the Manifest V3 Chrome Extension package.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn green btn-sm" href="{html.escape(cfg.gumroad_vault_url)}" target="_blank" rel="noopener">Download AI &amp; DevOps Vault (.ZIP) →</a>
+            <a class="btn sec btn-sm" href="{html.escape(cfg.chrome_ext_url)}" target="_blank" rel="noopener">Chrome Extension (.ZIP) →</a>
+          </div>
         </div>
         <div>
-          <span class="badge">Developer Cloud &amp; AI Stack</span>
-          <h3>Automate Your Cron Jobs, APIs &amp; LLM Workflows</h3>
-          <p class="muted" style="font-size:0.86rem">Deploy scheduled Python/Node workers, test API endpoints, and optimize token costs with our browser-first developer toolkit.</p>
-          <a class="btn btn-sm" href="{html.escape(cfg.affiliate_cloud_url or cfg.affiliate_ai_url or (prefix + 'tools/cron-expression-builder.html'))}" rel="sponsored noopener">Explore Automation Stack →</a>
+          <span class="badge">쿠팡 파트너스 개발자·데스크셋업 특가 (ID: {html.escape(cfg.coupang_partner_id)})</span>
+          <h3>오늘의 쿠팡 로켓배송 IT·노트북·모니터·골드박스 특가</h3>
+          <p class="muted" style="font-size:0.86rem">개발자·크리에이터 홈오피스 장비 및 매일 업데이트되는 쿠팡 로켓배송·골드박스 일일특가를 확인하세요.</p>
+          <a class="btn btn-sm" href="{html.escape(cfg.affiliate_cloud_url)}" target="_blank" rel="nofollow sponsored noopener">쿠팡 로켓배송·골드박스 특가 바로가기 →</a>
+          <p class="muted" style="font-size:0.74rem;margin-top:8px">※ 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
         </div>
       </div>
     </section>

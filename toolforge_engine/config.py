@@ -1,4 +1,4 @@
-"""Configuration for ToolForge Pro with Affiliate & Gumroad Vault slots."""
+"""Configuration for ToolForge Pro with Coupang Partners (AF9272027) & Release Vault."""
 from __future__ import annotations
 
 import os
@@ -19,9 +19,11 @@ class ToolForgeConfig:
     enable_indexnow: bool
     contact_email: str
     dist_dir: Path
-    affiliate_cloud_url: str = ""
-    affiliate_ai_url: str = ""
-    gumroad_vault_url: str = ""
+    affiliate_cloud_url: str = "https://link.coupang.com/a/iSVrev2q5s"
+    affiliate_ai_url: str = "https://link.coupang.com/a/iSVpT5nClE"
+    gumroad_vault_url: str = "https://github.com/dream8837z/devtool-ai-utility-autopilot/releases/download/v1.0.0/ToolForge_AI_Prompt_DevOps_Vault_v1.zip"
+    chrome_ext_url: str = "https://github.com/dream8837z/devtool-ai-utility-autopilot/releases/download/v1.0.0/toolforge-pro-extension-v1.0.0.zip"
+    coupang_partner_id: str = "AF9272027"
 
     @property
     def adsense_pub_id(self) -> str:
@@ -55,7 +57,8 @@ def load_config(project_root: Path | None = None) -> ToolForgeConfig:
         enable_indexnow=os.environ.get("ENABLE_INDEXNOW", "false").lower() == "true",
         contact_email=os.environ.get("CONTACT_EMAIL", "contact@toolforge.pro"),
         dist_dir=root / "dist",
-        affiliate_cloud_url=os.environ.get("AFFILIATE_CLOUD_URL", "").strip(),
-        affiliate_ai_url=os.environ.get("AFFILIATE_AI_URL", "").strip(),
-        gumroad_vault_url=os.environ.get("GUMROAD_VAULT_URL", "").strip(),
+        affiliate_cloud_url=os.environ.get("AFFILIATE_CLOUD_URL", "").strip() or "https://link.coupang.com/a/iSVrev2q5s",
+        affiliate_ai_url=os.environ.get("AFFILIATE_AI_URL", "").strip() or "https://link.coupang.com/a/iSVpT5nClE",
+        gumroad_vault_url=os.environ.get("GUMROAD_VAULT_URL", "").strip() or "https://github.com/dream8837z/devtool-ai-utility-autopilot/releases/download/v1.0.0/ToolForge_AI_Prompt_DevOps_Vault_v1.zip",
+        chrome_ext_url=os.environ.get("CHROME_EXT_URL", "").strip() or "https://github.com/dream8837z/devtool-ai-utility-autopilot/releases/download/v1.0.0/toolforge-pro-extension-v1.0.0.zip",
     )
