@@ -1,0 +1,52 @@
+name: Daily ToolForge Pro Build, IndexNow Ping & Deploy
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run unit & integration tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Build 95-page Non-YMYL DevTools & AI Prompt site
+        env:
+          SITE_URL: "https://dream8837z.github.io/devtool-ai-utility-autopilot"
+          ADSENSE_CLIENT_ID: ${{ secrets.ADSENSE_CLIENT_ID || 'ca-pub-9014872001634608' }}
+          ENABLE_INDEXNOW: "false"
+          AFFILIATE_CLOUD_URL: ${{ secrets.AFFILIATE_CLOUD_URL }}
+          AFFILIATE_AI_URL: ${{ secrets.AFFILIATE_AI_URL }}
+          GUMROAD_VAULT_URL: ${{ secrets.GUMROAD_VAULT_URL }}
+        run: python3 -m toolforge_engine
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy-pages:
+    needs: build-and-audit
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Ping IndexNow (Bing / Naver / DuckDuckGo instant indexing)
+        run: |
+          curl -sS -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{"host":"dream8837z.github.io","key":"toolforgeindexnowkey2026901487","keyLocation":"https://dream8837z.github.io/devtool-ai-utility-autopilot/toolforgeindexnowkey2026901487.txt","urlList":["https://dream8837z.github.io/devtool-ai-utility-autopilot/","https://dream8837z.github.io/devtool-ai-utility-autopilot/tools/json-formatter-validator.html","https://dream8837z.github.io/devtool-ai-utility-autopilot/tools/cron-expression-builder.html","https://dream8837z.github.io/devtool-ai-utility-autopilot/tools/regex-tester-cheatsheet.html","https://dream8837z.github.io/devtool-ai-utility-autopilot/tools/ai-prompt-optimizer.html"]}' || true
